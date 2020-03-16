@@ -11,7 +11,9 @@ const bodyParser = require('body-parser');
 const DBconnection = require('./DBconnection');
 DBconnection();
 
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+
 const methodRouter = require('./routes/method');
 const newTargetRouter = require('./routes/newTarget');
 const getTagsRouter = require('./routes/getTags');
@@ -35,7 +37,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', usersRouter);
+app.use('/', authRouter);
+app.use('/user', userRouter);
+
 app.use('/method', methodRouter);
 app.use('/newTarget', newTargetRouter);
 app.use('/getTags', getTagsRouter);
